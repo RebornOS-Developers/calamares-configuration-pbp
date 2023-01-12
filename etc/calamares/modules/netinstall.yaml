@@ -154,6 +154,18 @@
           description: D-Bus interface for user account query and manipulation
         - name: packagekit
           description: A system designed to make installation and updates of packages easier
+        - name: gvfs
+          description: "Virtual filesystem implementation for GIO"
+        - name: gvfs-afc
+          description: "GIO (AFC backend; Apple mobile devices)"
+        - name: gvfs-gphoto2
+          description: "GIO (gphoto2 backend; PTP camera, MTP media player)"
+        - name: gvfs-mtp
+          description: "GIO (MTP backend; Android, media player)"
+        - name: gvfs-nfs
+          description: "GIO (NFS backend)"
+        - name: gvfs-smb
+          description: "GIO (SMB/CIFS backend; Windows client)" 
       subgroups:
         - name: Display
           subgroups: 
@@ -194,6 +206,20 @@
                   description: Supports Cisco and Juniper VPNs
                 - name: wireguard-tools
                   description: Next generation secure network tunnel
+            - name: Firewall
+              description: Control incoming and outgoing network connections
+              packages:
+                - name: firewalld
+                  description: Firewall daemon with D-Bus interface
+        - name: Bluetooth  
+          description: Bluetooth Drivers      
+          packages:
+            - name: bluez
+              description: The Bluetooth protocol stack
+            - name: bluez-utils
+              description: Development and debugging utilities for bluez
+            - name: blueman
+              description: A full featured Bluetooth manager
         - name: Storage
           subgroups:
             - name: Filesystems
@@ -336,6 +362,16 @@
               description: Next generation secure network tunnel
             - name: pptpclient
               description: Client for the proprietary Microsoft Point-to-Point Tunneling Protocol
+        - name: Firewall
+          description: Control incoming and outgoing network connections
+          noncheckable: true
+          packages:
+            - name: firewalld
+              description: Firewall daemon with D-Bus interface
+            - name: ufw
+              description: Uncomplicated and easy to use CLI tool for managing a netfilter firewall                      
+            - name: gufw
+              description: Gtk frontend for ufw         
     - name: Bluetooth        
       packages:
         - name: bluez
