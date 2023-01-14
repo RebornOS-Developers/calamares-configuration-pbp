@@ -71,8 +71,8 @@
   packages:
     - name: linux-arm64
       description: The latest Linux kernel release
-    - name: linux-arm64-firmware
-      description: Firmware files for Linux
+    - name: linux-arm64-headers
+      description: Linux-kernel-headers
     - name: mkinitcpio
       description: Script to create the initial ramdisk. Required to re-run after configuring LVM, system encryption, or RAID
     - name: tow-boot-pbp
@@ -138,6 +138,13 @@
               description: Commandline AUR helper
             - name: pamac-aur
               description: Graphical package management
+        - name: Fonts
+          description: Fonts required to see all characters on RebornOS
+          packages:
+            - name: adobe-source-han-serif-otc-fonts
+              description: "Adobe Source Han Serif - Pan-CJK OpenType/CFF Collection fonts"
+            - name: adobe-source-han-sans-otc-fonts
+              description: "Adobe Source Han Sans - Pan-CJK OpenType/CFF Collection fonts"                
     - name: Backend System
       packages: 
         - name: base-devel
@@ -188,8 +195,6 @@
               packages:
                 - name: pipewire
                   description: Low-latency audio/video router and processor
-                - name: lib32-pipewire
-                  description: For PipeWire with 32-bit support 
                 - name: pipewire-alsa
                   description: For PipeWire to manage ALSA as well
                 - name: pipewire-pulse
@@ -246,28 +251,21 @@
               description: A thin wrapper around libinput for input devices in X
             - name: xorg-xinput
               description: Tools to configure devices at runtime 
-        - name: Virtualization (as Guest)
-          description: Run RebornOS on a VM
-          subgroups:
-            - name: VirtualBox
-              packages: 
-                - name: virtualbox-guest-utils
-                  description: VirtualBox Guest utilities with X support
-            - name: VMWare
-              packages: 
-                - name: open-vm-tools
-                  description: Suite of open source virtualization utilities and drivers
-                - name: gtkmm3
-                  description: C++ bindings for GTK+ 3
-                - name: xf86-video-vmware
-                  description: X.org vmware video driver
-                - name: xf86-input-vmmouse
-                  description: X.org VMWare Mouse input driver
-                - name: mesa
-                  description: Open-source implementation of the OpenGL specification
-            - name: QEMU
-              packages: 
-                - qemu-guest-agent   
+- name: RebornOS
+  description: RebornOS Base and Apps
+  selected: true
+  subgroups:
+    - name: RebornOS Base
+      critical: true
+      packages: 
+        - rebornos-keyring
+        - rebornos-mirrorlist
+        - rebornos-os-release
+        - rebornos-logo 
+    - name: RebornOS Applications      
+      packages:
+        - name: rebornos-welcome
+          description: To get you started with RebornOS
 - name: Backend System
   description: Behind-the-scenes working of your Operating System  
   noncheckable: true
