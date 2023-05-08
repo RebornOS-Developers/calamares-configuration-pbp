@@ -1,8 +1,9 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
 pkgname=calamares-configuration-pbp
-pkgver=0.1.7
-pkgrel=2
+pkgver=0.1.11
+pkgrel=1
+
 
 arch=('i686' 'x86_64' 'aarch64' 'armv7h')
 pkgdesc='Configuration for the RebornOS Calamares installer.'
@@ -117,8 +118,8 @@ package() {
     (   # -------------------
         # Copy custom modules
         # -------------------
-        cd "$LIB_DIRECTORY" && \
-        find pre_install \
+        cd "$DIST_DIRECTORY" && \
+        find preinstall_copy \
             -type f \
             -exec \
                 install -Dm 755 "{}" "${pkgdir}/$LIB_DIRECTORY_STUB/{}" \;

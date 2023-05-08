@@ -25,7 +25,6 @@ NVIDIA_PACKAGES: List[str] = [
     "nvidia-open-dkms",
     "nvidia-470xx-dkms",
     "nvidia-390xx-dkms",
-    "nvidia-340xx-dkms",
 ]
 
 LOGGING_FORMAT: str = '%(asctime)s [%(levelname)8s] %(message)s (%(funcName)s; Line %(lineno)d)'
@@ -40,6 +39,12 @@ def main():
         filemode='w',
         encoding='utf-8', level=logging.DEBUG
     )
+    
+    if os.path.isfile("/opt/trinity/bin/tdm"):
+        with open("/opt/trinity/share/config/tdm/tdmrc", "a") as f:
+            f.write("MaxShowUID=65000")
+            f.write("MinShowUID=1000")
+            f.write("ShowUsers=NotHidden")
 
     change_to_script_directory()
 

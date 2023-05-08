@@ -131,7 +131,10 @@
           subgroups: 
             - name: Console
               packages:
-                - nano
+                - name: nano
+                  description: Command-line text editor, free replacement for Pico
+                - name: micro
+                  description: Modern and intuitive terminal-based text editor
         - name: Package Management
           packages:
             - name: yay
@@ -214,8 +217,8 @@
             - name: Firewall
               description: Control incoming and outgoing network connections
               packages:
-                - name: firewalld
-                  description: Firewall daemon with D-Bus interface
+                - name: gufw
+                  description: Uncomplicated Firewall
         - name: Bluetooth  
           description: Bluetooth Drivers      
           packages:
@@ -501,6 +504,8 @@
               description: Linux application sandboxing and distribution framework (formerly xdg-app)
             - name: xdg-desktop-portal
               description: For flatpak apps to interact with your desktop
+            - name: flatseal
+              description: A permissions manager for Flatpak.
         # - name: Snap
         #   description: Software deployment and package management system
         #   packages: 
@@ -508,6 +513,11 @@
         #       description: Service and tools for management of snap packages
         #     - name: apparmor
         #       description: Mandatory Access Control (MAC) using Linux Security Module (LSM)
+        - name: Appimages
+          description: Tools for managing & updating appimages
+          packages: 
+            - name: appimagelauncher
+              description: A Helper application for running and integrating AppImages.           
     - name: Theming and Customization
       description: Tools for Theming and Customization
       noncheckable: true
@@ -769,6 +779,24 @@
               description: Securely download, verify, install, and launch Tor Browser, a fork of Firefox ESR
             - name: nyx
               description: Command-line status monitor for tor
+        - name: Firewall
+          description: Control incoming and outgoing network connections
+          noncheckable: true
+          packages:
+            - name: firewalld
+              description: Firewall daemon with D-Bus interface
+            - name: ufw
+              description: Uncomplicated and easy to use CLI tool for managing a netfilter firewall                      
+            - name: gufw
+              description: Gtk frontend for ufw                
+    - name: Fonts
+      description: Fonts required to see all characters on RebornOS
+      noncheckable: true
+      packages:
+        - name: adobe-source-han-serif-otc-fonts
+          description: "Adobe Source Han Serif - Pan-CJK OpenType/CFF Collection fonts"
+        - name: adobe-source-han-sans-otc-fonts
+          description: "Adobe Source Han Sans - Pan-CJK OpenType/CFF Collection fonts"           
 - name: Leisure and Entertainment
   description: Anything other than serious work
   selected: false
@@ -952,11 +980,13 @@
         - name: pidgin
           description: Multi-protocol instant messaging client
         - name: telegram-desktop
-          description: Official Telegram Desktop client        
+          description: Official Telegram Desktop client
         - name: telepathy-kde-meta
           description: KDE instant messaging client using the Telepathy framework. Meant as a replacement for Kopete
         - name: kopete
           description: User-friendly IM supporting Bonjour, Gadu-Gadu, GroupWise, ICQ, XMPP
+        - name: discord
+          description: "All-in-one voice and text chat for gamers"
     - name: Video Players
       noncheckable: true
       packages:
