@@ -1,10 +1,11 @@
 # Maintainer: shivanandvp <shivanandvp@rebornos.org, shivanandvp.oss@gmail.com>
 
-pkgname=calamares-configuration-local
+pkgname=calamares-configuration-pbp
 pkgver=0.1.11
 pkgrel=1
 
-arch=('i686' 'x86_64' 'armv6h' 'armv7h')
+
+arch=('i686' 'x86_64' 'aarch64' 'armv7h')
 pkgdesc='Configuration for the RebornOS Calamares installer.'
 url='https://github.com/RebornOS-Developers/calamares-configuration'
 license=('GPL3')
@@ -17,15 +18,15 @@ makedepends=()
 
 source=()
 
-pkgver() {        
-    PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"     
+# pkgver() {        
+#     PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"     
 
-    ( cd "$PROJECT_DIRECTORY" 
-        set -o pipefail
-        git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
-        printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
-    )
-}
+#     ( cd "$PROJECT_DIRECTORY" 
+#         set -o pipefail
+#         git describe --long 2>/dev/null | sed 's/\([^-]*-g\)/r\1/;s/-/./g' ||
+#         printf "r%s.%s" "$(git rev-list --count HEAD)" "$(git rev-parse --short HEAD)"
+#     )
+# }
 
 package() {
     PROJECT_DIRECTORY="$(dirname -- "$(dirname -- "$(dirname -- "$(pwd)")")")"
@@ -105,22 +106,32 @@ package() {
             -exec \
                 install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
     )
+    # (   # -------------------
+    #     # Copy local packages
+    #     # -------------------
+    #     cd "$DIST_DIRECTORY" && \
+    #     find local_packages \
+    #         -type f \
+    #         -exec \
+    #             install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
+    # )
     (   # -------------------
-        # Copy local packages
+        # Copy custom modules
         # -------------------
         cd "$DIST_DIRECTORY" && \
         find preinstall_copy \
             -type f \
             -exec \
-                install -Dm 700 "{}" "${pkgdir}/$DIST_DIRECTORY_STUB/{}" \;
+                install -Dm 755 "{}" "${pkgdir}/$LIB_DIRECTORY_STUB/{}" \;
     )
     (   # -------------------
         # Copy custom modules
         # -------------------
         cd "$LIB_DIRECTORY" && \
-        find pre_install \
+        find arm_install \
             -type f \
             -exec \
                 install -Dm 755 "{}" "${pkgdir}/$LIB_DIRECTORY_STUB/{}" \;
     )
+
 }

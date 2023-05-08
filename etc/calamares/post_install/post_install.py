@@ -69,7 +69,6 @@ def main():
         config=config
     )
 
-
 def change_to_script_directory():
     logging.info(
         "Changing the working directory to the post_install.py script path...")
